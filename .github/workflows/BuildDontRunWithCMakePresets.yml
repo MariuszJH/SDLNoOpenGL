@@ -97,20 +97,13 @@ jobs:
     - name: Install SDL Linux
       if: ${{matrix.os == 'ubuntu-latest'}}
       run: sudo apt-get install libsdl2-dev
-      # uses: libsdl-org/setup-sdl@main
-      # id: sdl
-      # with:
-      #   install-linux-dependencies: true
-      #   version: sdl2-latest
 
     - name: Install SDL Macos
       if: ${{matrix.os == 'macos-latest'}}
       run: brew install sdl2
 
     - name: Install SDL Windows
-    # - name: Download SDL if not cached
       if: ${{matrix.os == 'windows-latest'}}
-      # if: ${{ steps.cache-windows-sdl.outputs.cache-hit != 'true' }}
       run: |
         Invoke-WebRequest "https://github.com/libsdl-org/SDL/releases/download/release-$env:SDL_VERSION/SDL2-devel-$env:SDL_VERSION-VC.zip" -o C:\SDL.zip
         Expand-Archive C:\SDL.zip -DestinationPath C:\SDL2
@@ -167,8 +160,8 @@ jobs:
     - name: CMake build
       run: cmake --build --preset ${{matrix.preset}}
 
-    - name: CMake run program
-      run: cmake --build --preset ${{matrix.preset}} --target run
+    # - name: CMake run program
+    #   run: cmake --build --preset ${{matrix.preset}} --target run
 
 
   multiConfig:
@@ -246,11 +239,6 @@ jobs:
     - name: Install SDL Linux
       if: ${{matrix.os == 'ubuntu-latest'}}
       run: sudo apt-get install libsdl2-dev
-      # uses: libsdl-org/setup-sdl@main
-      # id: sdl
-      # with:
-      #   install-linux-dependencies: true
-      #   version: sdl2-latest
 
     - name: Install SDL Macos
       if: ${{matrix.os == 'macos-latest'}}
@@ -319,5 +307,5 @@ jobs:
     - name: CMake build
       run: cmake --build --preset ${{matrix.preset}} --config ${{matrix.build_type}}
 
-    - name: CMake run program
-      run: cmake --build --preset ${{matrix.preset}} --config ${{matrix.build_type}} --target run
+    # - name: CMake run program
+    #   run: cmake --build --preset ${{matrix.preset}} --config ${{matrix.build_type}} --target run
